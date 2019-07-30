@@ -1,12 +1,16 @@
-### A piper diagram based on the ternary plot example here: http://srmulcahy.github.io/2012/12/04/ternary-plots-r.html
-### This was written quickly, and most likely contains bugs - I advise you to check it first.
-### Jason Lessels jlessels@gmail.com
-
-### This now consists of two functions. transform_piper_data transforms the data to match 
+##This an edited version of the function described by 
+##https://gist.github.com/johnDorian/5561272 (by Jason Lessels, jlessels@gmail.com). 
+    
+### This now consists of three functions. 
+#   transform_piper_data: transforms the data to match 
+#   ggplot_piper: plot the Piper diagram
+#   toPercent: copied from the hydrogeo package
+## The example currently utilises the function
+#   conc2meq from the smwrGraphs package: this converts the mg/L to meq/L via mg/L * mol/g * valence = meq/L
 ### the coordinates of the piper diagram. ggplot_piper does all of the background.
 
 ##See also https://github.com/markolipka/ggplot_Piper
-##Modified so as to plot as ggplot or plotly for interactive
+##Here we modify the function so as to plot as a ggplot or plotly for interactive viewing
 
 transform_piper_data <- function(Mg, Ca, Cl,SO4, name=NULL){
   if(is.null(name)){
@@ -140,9 +144,9 @@ toPercent <- function (d) {
   return(d)
 }
 
+#Read raw data
 library(smwrGraphs)
-
-path <- "T:\\530-Wetlands Conservation Program\\Shared Data\\WCP HYDROLOGY\\Other_Projects\\AshfieldFlats\\MonitoringData\\Laboratories\\MPL"
+path <- "."
 WQFile <- "WQ_Database.csv"
 WQdata <- read.csv(paste0(path,"\\",WQFile), stringsAsFactors = FALSE, header = TRUE)
 #set date column format
